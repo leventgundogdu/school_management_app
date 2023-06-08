@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh;">
+  <h1 class="mb-5">Edit Grades</h1>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="student_select">Select Student:</label>
+      <select class="form-control" id="student_select" name="student_select" required>
+        <option value="">-- Select Student --</option>
+        <option value="JohnDoe">John Doe</option>
+        <option value="JaneSmith">Jane Smith</option>
+        <!-- Add more options for other students -->
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="midterm_grade">Midterm Grade:</label>
+      <input type="number" class="form-control" id="midterm_grade" name="midterm_grade" required>
+    </div>
+    <div class="form-group">
+      <label for="final_grade">Final Grade:</label>
+      <input type="number" class="form-control" id="final_grade" name="final_grade" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+{% endblock %}
+

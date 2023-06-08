@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh;">
+  <h1 class="mb-5">Create Class</h1>
+  <form method="post" action="">
+    {% csrf_token %}
+
+    <label for="class-name">Class Name:</label>
+    <input type="text" id="class-name" name="class-name" required>
+    <br>
+
+    <label for="class-code">Class Code:</label>
+    <input type="text" id="class-code" name="class-code" required>
+    <br>
+
+    <label for="teacher">Teacher:</label>
+    <select id="teacher" name="teacher">
+      <option value="">Select a teacher</option>
+      <!-- Add options dynamically using Django queryset or static options -->
+    </select>
+    <br>
+
+    <label for="students">Students:</label>
+    <select id="students" name="students" multiple>
+      <!-- Add options dynamically using Django queryset or static options -->
+    </select>
+    <br>
+
+    <button type="submit">Create Class</button>
+  </form>
+</div>
+{% endblock %}

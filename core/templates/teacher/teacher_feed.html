@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh;">
+  <h1 class="mb-5">Teacher Feed</h1>
+  <form action="{% url 'edit_grades' %}" method="GET">
+    <div class="form-group">
+      <label for="class_select">Select Class:</label>
+      <select class="form-control" id="class_select" name="class_select" required>
+        <option value="">-- Select Class --</option>
+        <option value="english">English</option>
+        <option value="mathematics">Mathematics</option>
+        <option value="science">Science</option>
+        <!-- Add more options for other classes -->
+      </select>
+    </div>
+    <table class="table mt-5">
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Midterm Grade</th>
+          <th>Final Grade</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>John Doe</td>
+          <td>85</td>
+          <td>90</td>
+          <td><a href="{% url 'edit_grades' %}?student=JohnDoe">Edit</a></td>
+        </tr>
+        <tr>
+          <td>Jane Smith</td>
+          <td>92</td>
+          <td>88</td>
+          <td><a href="{% url 'edit_grades' %}?student=JaneSmith">Edit</a></td>
+        </tr>
+        <!-- Add more rows for other students -->
+      </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+{% endblock %}

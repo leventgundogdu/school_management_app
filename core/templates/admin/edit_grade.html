@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh;">
+  <h1 class="mb-5">Edit Grade</h1>
+  <form method="post" action="">
+    {% csrf_token %}
+
+    <!-- Add dropdowns for each class -->
+    <label for="class1">Class 1:</label>
+    <select id="class1" name="class1" onchange="updateGrade('class1')">
+      <option value="">Select a class</option>
+      <!-- Add options dynamically using Django queryset or static options -->
+    </select>
+    <br>
+
+    <label for="class2">Class 2:</label>
+    <select id="class2" name="class2" onchange="updateGrade('class2')">
+      <option value="">Select a class</option>
+      <!-- Add options dynamically using Django queryset or static options -->
+    </select>
+    <br>
+
+    <!-- Add input fields for midterm and final grades -->
+    <label for="midterm">Midterm Grade:</label>
+    <input type="text" id="midterm" name="midterm">
+    <br>
+
+    <label for="final">Final Grade:</label>
+    <input type="text" id="final" name="final">
+    <br>
+
+    <button type="submit">Save</button>
+  </form>
+</div>
+
+<script>
+  function updateGrade(classId) {
+    const classSelect = document.getElementById(classId);
+    const midtermInput = document.getElementById('midterm');
+    const finalInput = document.getElementById('final');
+    
+    // Retrieve the selected class and update the grades accordingly
+    const selectedClass = classSelect.value;
+    
+    // Perform your logic to fetch the corresponding grades based on the selected class
+    // You can use AJAX requests or update the grades using Django's templating language
+    
+    // Example: Assuming you have a JavaScript object 'grades' mapping class names to grades
+    const grades = {
+      'Class A': { midterm: 80, final: 90 },
+      'Class B': { midterm: 75, final: 85 },
+      // Add more class-grade mappings
+    };
+
+    // Update the input fields with the corresponding grades
+    const selectedGrade = grades[selectedClass];
+    if (selectedGrade) {
+      midtermInput.value = selectedGrade.midterm;
+      finalInput.value = selectedGrade.final;
+    } else {
+      // Reset the input fields if no grade is found for the selected class
+      midtermInput.value = '';
+      finalInput.value = '';
+    }
+  }
+</script>
+{% endblock %}
