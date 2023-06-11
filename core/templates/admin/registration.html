@@ -3,6 +3,9 @@
 {% block content %}
 <div class="d-flex flex-column align-items-center justify-content-start" style="min-height: 100vh;">
   <div class="sticky-top bg-white p-3 mb-4">
+    <div class="back-button">
+      <a href="{% url 'admin-page' %}">Back</a>
+    </div>
     <h1>Create User</h1>
     <form method="post" action="{% url 'create-user' %}">
       {% csrf_token %}
@@ -36,7 +39,7 @@
     </form>
   </div>
 
-  <!-- Display existing students and teachers -->
+  <!-- Display existing teachers -->
   <h2>Existing Teachers</h2>
   <table class="table">
     <thead>
@@ -47,42 +50,39 @@
       </tr>
     </thead>
     <tbody>
-      <!-- Add rows dynamically using Django queryset or static data -->
+      {% for teacher in teachers %}
       <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>123456</td>
+        <td>{{ teacher.firstname }}</td>
+        <td>{{ teacher.lastname }}</td>
+        <td>{{ teacher.teacher_id }}</td>
       </tr>
-      <tr>
-        <td>Jane</td>
-        <td>Smith</td>
-        <td>789012</td>
-      </tr>
+      {% endfor %}
     </tbody>
   </table>
 
-  <h2>Existing Students</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Student ID</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Add rows dynamically using Django queryset or static data -->
-      <tr>
-        <td>Adam</td>
-        <td>Johnson</td>
-        <td>567890</td>
-      </tr>
-      <tr>
-        <td>Sarah</td>
-        <td>Williams</td>
-        <td>123789</td>
-      </tr>
-    </tbody>
-  </table>
+<!-- Display existing students -->
+<h2>Existing Students</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Student ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for student in students %}
+    <tr>
+      <td>{{ student.firstname }}</td>
+      <td>{{ student.lastname }}</td>
+      <td>{{ student.student_id }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="3">No students found</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 </div>
 {% endblock %}

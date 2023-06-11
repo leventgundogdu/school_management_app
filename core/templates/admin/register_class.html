@@ -2,32 +2,52 @@
 
 {% block content %}
 <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh;">
+
+  {% if messages %}
+  <div class="messages">
+    {% for message in messages %}
+    <div class="message {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="back-button">
+    <a href="{% url 'admin-page' %}">Back</a>
+  </div>
+
   <h1 class="mb-5">Create Class</h1>
-  <form method="post" action="">
+  <form method="post" action="{% url 'register-class' %}">
     {% csrf_token %}
 
     <label for="class-name">Class Name:</label>
     <input type="text" id="class-name" name="class-name" required>
     <br>
 
-    <label for="class-code">Class Code:</label>
-    <input type="text" id="class-code" name="class-code" required>
-    <br>
-
     <label for="teacher">Teacher:</label>
     <select id="teacher" name="teacher">
       <option value="">Select a teacher</option>
-      <!-- Add options dynamically using Django queryset or static options -->
+      {% for teacher in teachers %}
+        <option value="{{ teacher.id }}">{{ teacher.firstname }} {{ teacher.lastname }}</option>
+      {% endfor %}
     </select>
     <br>
 
     <label for="students">Students:</label>
     <select id="students" name="students" multiple>
-      <!-- Add options dynamically using Django queryset or static options -->
+      {% for student in students %}
+        <option value="{{ student.id }}">{{ student.firstname }} {{ student.lastname }}</option>
+      {% endfor %}
     </select>
     <br>
 
     <button type="submit">Create Class</button>
   </form>
+
+  <h1 class="mt-5">Existing Classes</h1>
+  <ul>
+    {% for class in classes %}
+      <li>{{ class.class_name }} - {{ class.teacher.firstname }} {{ class.teacher.lastname }}</li>
+    {% endfor %}
+  </ul>
 </div>
 {% endblock %}

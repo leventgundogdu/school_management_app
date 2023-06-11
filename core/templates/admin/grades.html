@@ -3,33 +3,35 @@
 {% block content %}
 <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh;">
   <h1 class="mb-5">Manage Grades</h1>
+  <div class="d-flex flex-column align-items-start">
+    <a href="{% url 'admin-page' %}" class="btn btn-primary btn-lg mb-3" style="align-self: flex-start;">Back</a>
+  </div>
   <table class="table">
     <thead>
       <tr>
         <th>Student Name</th>
+        <th>Class</th>
         <th>Midterm Grade</th>
         <th>Final Grade</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <!-- Add rows dynamically using Django queryset or static data -->
+      {% for grade in grades %}
       <tr>
-        <td>John Doe</td>
-        <td>85</td>
-        <td>90</td>
+        <td>{{ grade.student.firstname }} {{ grade.student.lastname }}</td>
+        <td>{{ grade.class_field.class_name }}</td>
+        <td>{{ grade.midterm|default:"0" }}</td>
+        <td>{{ grade.final|default:"0" }}</td>
         <td>
-          <a href="{% url 'edit-grade' %}" class="btn btn-primary btn-sm">Edit</a>
+          <a href="{% url 'edit-grade' grade.id %}" class="btn btn-primary btn-sm">Edit</a>
         </td>
       </tr>
+      {% empty %}
       <tr>
-        <td>Jane Smith</td>
-        <td>92</td>
-        <td>88</td>
-        <td>
-          <a href="{% url 'edit-grade' %}" class="btn btn-primary btn-sm">Edit</a>
-        </td>
+        <td colspan="5">No grades available.</td>
       </tr>
+      {% endfor %}
     </tbody>
   </table>
 </div>

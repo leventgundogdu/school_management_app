@@ -3,7 +3,8 @@
 {% block content %}
 <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh;">
   <h1 class="mb-5">Welcome, Admin!</h1>
-  <div class="d-flex flex-column align-items-center">
+  <div class="d-flex flex-column align-items-start">
+    <a href="{% url 'home' %}" class="btn btn-primary btn-lg mb-3" style="align-self: flex-start;">Home</a>
     <a href="{% url 'create-user' %}" class="btn btn-primary btn-lg mb-3">Register Users</a>
     <a href="{% url 'register-class' %}" class="btn btn-primary btn-lg mb-3">Create Classes</a>
     <a href="{% url 'grades' %}" class="btn btn-primary btn-lg">Manage Grades</a>
