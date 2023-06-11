@@ -7,27 +7,18 @@
     <thead>
       <tr>
         <th>Class</th>
-        <th>Midterm</th>
-        <th>Final</th>
+        <th>Midterm Grade</th>
+        <th>Final Grade</th>
       </tr>
     </thead>
     <tbody>
-      <!-- Display student grades dynamically using Django queryset or static data -->
+      {% for grade in grades %}
       <tr>
-        <td>English</td>
-        <td>85</td>
-        <td>90</td>
+        <td>{{ grade.class_field.class_name }}</td>
+        <td>{{ grade.midterm }}</td>
+        <td>{{ grade.final }}</td>
       </tr>
-      <tr>
-        <td>Mathematics</td>
-        <td>92</td>
-        <td>88</td>
-      </tr>
-      <tr>
-        <td>Science</td>
-        <td>78</td>
-        <td>82</td>
-      </tr>
+      {% endfor %}
     </tbody>
   </table>
 </div>

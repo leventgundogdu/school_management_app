@@ -29,7 +29,7 @@ urlpatterns = [
 
 
     path('student/', views.student_login, name='student-login'),
-    path('student/grades/<str:student_id>/', views.student_grades, name='student-grades'),
+    path('student/grades/<int:student_id>/', views.student_grades, name='student-grades'),
     
     path('teacher/', views.teacher_login, name='teacher-login'),
     path('teacher/feed/', views.teacher_feed, name='teacher-feed'),

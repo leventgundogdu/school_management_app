@@ -1,8 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Teacher, Student, Class, Grade
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .forms import GradeForm
+import logging
+
+
+logger = logging.getLogger(__name__)
+
+
 
 
 def home(request):
@@ -127,22 +133,19 @@ def create_user(request):
 
 def student_login(request):
     if request.method == 'POST':
-        student_id = request.POST.get('student-id')
-        # Perform any necessary validation or processing
-        # Redirect to the student grades page with the student ID
-        return redirect('student-grades', student_id=student_id)
+        student_id = request.POST['student_id']
+        return HttpResponseRedirect(f"/student/grades/{student_id}/")
     return render(request, 'student/student.html')
 
 def student_grades(request, student_id):
-    # Retrieve the student's grades using the provided student ID
-    # Replace the static data with your logic to fetch student grades
-    grades = [
-        {'class': 'English', 'grade': 85},
-        {'class': 'Mathematics', 'grade': 92},
-        {'class': 'Science', 'grade': 78},
-    ]
+    print("Received student ID:", student_id)
+
+    # Retrieve the student grades from the Grade table based on the student ID
+    grades = Grade.objects.filter(student__student_id=student_id)
     context = {'grades': grades}
     return render(request, 'student/student_grades.html', context)
+
+
 
 
 def teacher_login(request):
