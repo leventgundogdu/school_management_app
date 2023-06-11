@@ -33,6 +33,6 @@ urlpatterns = [
     
     path('teacher/', views.teacher_login, name='teacher-login'),
     path('teacher/feed/', views.teacher_feed, name='teacher-feed'),
-    path('teacher/grades/edit/', views.edit_grades, name='edit-grades'),
+    path('teacher/edit-grades/<int:grade_id>/', views.edit_grades, name='edit-grades'),
     
 ]

@@ -18,26 +18,18 @@
     const midtermInput = document.getElementById('id_midterm');
     const finalInput = document.getElementById('id_final');
     
-    // Retrieve the selected class and update the grades accordingly
     const selectedClass = classSelect.value;
     
-    // Perform your logic to fetch the corresponding grades based on the selected class
-    // You can use AJAX requests or update the grades using Django's templating language
-    
-    // Example: Assuming you have a JavaScript object 'grades' mapping class names to grades
     const grades = {
       'Class A': { midterm: 80, final: 90 },
       'Class B': { midterm: 75, final: 85 },
-      // Add more class-grade mappings
     };
 
-    // Update the input fields with the corresponding grades
     const selectedGrade = grades[selectedClass];
     if (selectedGrade) {
       midtermInput.value = selectedGrade.midterm;
       finalInput.value = selectedGrade.final;
     } else {
-      // Reset the input fields if no grade is found for the selected class
       midtermInput.value = '';
       finalInput.value = '';
     }
